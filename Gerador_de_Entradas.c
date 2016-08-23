@@ -26,6 +26,8 @@ int main(){
 		fwrite(andar_chamado,1,sizeof(int),fp);
 		fwrite(tempo_de_chamada,1,sizeof(int),fp);
 	}
-
+	
+	fclose(fp);
+	
 return 0;
 }
