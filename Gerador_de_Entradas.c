@@ -1,30 +1,37 @@
-/*Código usado apenas para gerar os dados de entrada das simulações, gera um arquivo binário com as informações: andar e tempo
-de chamada, para ler a informação deve-se usar while fread != 0 e ler dois inteiros um de cada vez em que o primeiro será 
-o andar e o segundo o tempo de chamada. */
+/*Código usado apenas para gerar os dados de entrada das simulações, gera um arquivo texto com a seguinte configuração:
+	1ª coluna -> andar de origem    	2ª coluna -> andar de destino 		3ª coluna -> tempo de chamada
+	cada linha é um evento independente, a ordem do arquivo texto é indiferente, o que importa é o tempo de chamada				*/
 
 #include <stdio.h>
 #include <stdlib.h>
 
-#define ANDAR_MAXIMO 100
-#define NUMERO_DE_PESSOAS_MAXIMO 10
-#define NUMERO_DE_EVENTOS 5
+#define ANDAR_MAXIMO 25
+#define NUMERO_DE_EVENTOS 100
+
 /* Constantes auto explicativas, NUMERO_DE_EVENTOS dita quantas pessoas vão chamar o elevador na simulação
-melhor começar com valores pequenos para facilitar a depuração	*/
+	 melhor começar com valores pequenos para facilitar a depuração*/
 
 int main(){
 	
-	FILE *fp;
-	int andar_chamado, tempo_de_chamada, pessoas_a_entrar;
+	FILE *fp=NULL;
+	int andar_de_origem, andar_de_destino, tempo_de_chamada, pessoas_a_entrar;
+
 	/* O tempo de chamada de cada pessoa é limitado ao momento 1000 da simulação*/
 	
-	fp = fopen("arquivo_com_as_entradas.txt","w");
+	fp = fopen("arquivo_com_as_entradas.txt","w+");
 	pessoas_a_entrar = NUMERO_DE_EVENTOS;
 	while(pessoas_a_entrar>0){
 		/* Gera um número aleatório para o andar que foi chamado entre o intervalo [1,ANDAR_MAXIMO] */
-		andar_chamado = (rand() % ANDAR_MAXIMO) +1;
+		andar_de_origem = (rand() % ANDAR_MAXIMO) +1;
+		do {
+			
+			andar_de_destino = (rand() % ANDAR_MAXIMO) +1;
+		}while(andar_de_origem==andar_de_destino);
+
 		tempo_de_chamada = rand() % 1000;
-		fwrite(&andar_chamado,sizeof(int),1,fp);
-		fwrite(&tempo_de_chamada,sizeof(int),1, fp);
+
+		fprintf(fp,"%d %d %d\n", andar_de_origem, andar_de_destino, tempo_de_chamada);
+		
 		pessoas_a_entrar--;
 	}
 	
