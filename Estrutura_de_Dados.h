@@ -7,7 +7,7 @@ typedef struct Celula_str *Apontador;
 typedef int TipoChave;
 
 typedef struct TipoItem {
-	TipoChave Chave;
+	TipoChave andar_de_origem, andar_de_destino, tempo_de_chamada;
 } TipoItem;
 
 typedef struct Celula_str {
