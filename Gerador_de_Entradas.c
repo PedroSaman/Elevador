@@ -1,4 +1,6 @@
 /*Código usado apenas para gerar os dados de entrada das simulações, gera um arquivo texto com a seguinte configuração:
+	A primeira linha tem na respectiva ordem: andar máximo, número de eventos e carga máxima
+	As próximas linhas serão da seguinte forma: 
 	1ª coluna -> andar de origem    	2ª coluna -> andar de destino 		3ª coluna -> tempo de chamada
 	cada linha é um evento independente, a ordem do arquivo texto é indiferente, o que importa é o tempo de chamada				*/
 
@@ -7,6 +9,7 @@
 
 #define ANDAR_MAXIMO 25
 #define NUMERO_DE_EVENTOS 100
+#define CARGA_MAXIMA 5 /*5 pessoas*/
 
 /* Constantes auto explicativas, NUMERO_DE_EVENTOS dita quantas pessoas vão chamar o elevador na simulação
 	 melhor começar com valores pequenos para facilitar a depuração*/
@@ -19,6 +22,7 @@ int main(){
 	/* O tempo de chamada de cada pessoa é limitado ao momento 1000 da simulação*/
 	
 	fp = fopen("arquivo_com_as_entradas.txt","w+");
+	fprintf(fp,"%d %d %d\n", ANDAR_MAXIMO, NUMERO_DE_EVENTOS, CARGA_MAXIMA);
 	pessoas_a_entrar = NUMERO_DE_EVENTOS;
 	while(pessoas_a_entrar>0){
 		/* Gera um número aleatório para o andar que foi chamado entre o intervalo [1,ANDAR_MAXIMO] */
