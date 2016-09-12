@@ -1,0 +1,56 @@
+#ifndef EstruturaDeDados
+#define EstruturaDeDados
+
+/*Definição dos tipos para uma fila usando apontadores*/
+
+typedef struct Celula_str *Apontador;
+typedef int TipoChave;
+
+typedef struct TipoItem {
+	TipoChave andar_de_origem, andar_de_destino, tempo_de_chamada;
+} TipoItem;
+
+typedef struct Celula_str {
+	TipoItem Item;
+	Apontador Prox;
+} Celula;
+
+typedef struct TipoFila {
+	Apontador Frente, Tras;
+} TipoFila;
+
+void Faz_Fila_Vazia(TipoFila *Fila);
+
+int Vazia(TipoFila Fila);
+
+void Enfileira(TipoItem x, TipoFila *Fila);
+
+void Desenfileira(TipoFila *Fila, TipoItem *Item);
+
+/*Definição dos tipos para uma lista usando apontadores*/
+
+typedef struct{
+
+	TipoChave andar_de_origem, andar_de_destino, tempo_de_chamada;
+
+} TipoItem;
+
+typedef struct Celula* apontador;   // define um ponteiro de celula (CELULA*)
+
+	typedef struct Celula{
+		apontador anter;
+		TipoItem Item;
+		apontador prox;
+	}Celula;
+
+	typedef struct TipoLista{
+		apontador inicio, final;
+	}TipoLista;
+
+void Faz_Lista_Vazia(TipoLista *lista);
+void Insere_na_Lista(TipoLista *lista, TipoItem X);
+void retira_da_Lista(TipoLista *lista, Celula *AUX);
+int Vazia(TipoLista *lista);
+
+
+#endif
