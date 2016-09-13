@@ -6,9 +6,10 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
-#define ANDAR_MAXIMO 25
-#define NUMERO_DE_EVENTOS 100
+#define ANDAR_MAXIMO 12
+#define NUMERO_DE_EVENTOS 25
 #define CARGA_MAXIMA 5 /*5 pessoas*/
 
 /* Constantes auto explicativas, NUMERO_DE_EVENTOS dita quantas pessoas vão chamar o elevador na simulação
@@ -47,6 +48,8 @@ int main(){
 	fp = fopen("arquivo_com_as_entradas.txt","w+");
 	fprintf(fp,"%d %d %d\n", ANDAR_MAXIMO, NUMERO_DE_EVENTOS, CARGA_MAXIMA);
 	pessoas_a_entrar = NUMERO_DE_EVENTOS;
+
+	srand(time(NULL));
 
 	for (i=0;i<pessoas_a_entrar;i++){
 		tempo_de_chamada[i] = rand() % 1000;
