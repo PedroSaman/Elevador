@@ -1,11 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "Estruturas_de_Dados.h"
+#include "Simulador.h"
 
 int main (){
 
 	FILE *fp=NULL;
-	int andar_maximo,numero_de_eventos,carga_maxima;
+	int andar_maximo,numero_de_eventos,carga_maxima, Linha_Do_Tempo = 0, Andar_Inicial = 1;
 	TipoFila Fila;
 	TipoItem Info;
 
@@ -25,8 +26,7 @@ int main (){
 		numero_de_eventos--;
 	}
 
-	/*CHAMAR O SIMULADOR AQUI, provavelmente vai retornar um arquivo com o tempo de espera e o tempo dentro do elevador 
-	para cada passageiro por linha. Aqui deverá ser lido o arquivo*/
+	Chamou_Elevador_FIFO(&Fila,Linha_Do_Tempo, Andar_Inicial);
 
 	return 0;
 }
