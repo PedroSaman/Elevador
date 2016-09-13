@@ -1,5 +1,5 @@
-#ifndef EstruturaDaPilha
-#define EstruturaDaPilha
+#ifndef EstruturaDaFila
+#define EstruturaDaFila
 
 /*Definição dos tipos para uma fila usando apontadores*/
 
@@ -26,5 +26,7 @@ int Vazia(TipoFila Fila);
 void Enfileira(TipoItem x, TipoFila *Fila);
 
 void Desenfileira(TipoFila *Fila, TipoItem *Item);
+
+int Modulo(int Numero);
 
 #endif
