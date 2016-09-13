@@ -38,3 +38,10 @@ void Desenfileira(TipoFila *Fila, TipoItem *Item){
 	*Item = Fila->Frente->Item;
 	free(q);
 }
+
+int Modulo(int Numero){
+	/*Retorna o módulo do número dado*/
+	if(Numero<0){
+		return Numero*=-1;
+	}else return Numero;
+}
