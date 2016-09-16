@@ -3,6 +3,26 @@
 #include "Estruturas_de_Dados.h"
 #include "Simulador.h"
 
+void Carrega_Fila_com_os_Dados(TipoFila *Fila){
+	FILE *fp=NULL;
+	int andar_maximo, numero_de_eventos, carga_maxima;
+	TipoItem Info;
+
+	fp = fopen("arquivo_com_as_entradas.txt","r");
+	if(fp == NULL){
+		printf("Erro ao tentar abrir o arquivo\n");
+	}
+	fscanf(fp,"%d %d %d", &andar_maximo, &numero_de_eventos, &carga_maxima);
+
+	while(numero_de_eventos>0){
+
+		fscanf(fp,"%d %d %d",&Info.andar_de_origem, &Info.andar_de_destino, &Info.tempo_de_chamada);
+		Enfileira(Info, Fila);
+		numero_de_eventos--;
+	}
+
+}
+
 int Chamou_Elevador_FIFO(TipoFila *Fila, int Linha_Do_Tempo, int Andar_inicial){
 	
 	TipoItem Info;
@@ -31,7 +51,7 @@ int Chamou_Elevador_FIFO(TipoFila *Fila, int Linha_Do_Tempo, int Andar_inicial){
 
 	Andar_Atual = Info.andar_de_destino;
 
-	Tempo_Atual = (Info.tempo_de_chamada+tempo_dentro_do_elevador+tempo_de_espera+2)
+	Tempo_Atual = (Info.tempo_de_chamada+tempo_dentro_do_elevador+tempo_de_espera+2);
 
 	printf("Tempo de espera: %d Zepslons\t Tempo dentro do elevador: %d Zepslons\n", tempo_de_espera, tempo_dentro_do_elevador);
 	return Chamou_Elevador_FIFO(Fila,Tempo_Atual,Andar_Atual);
