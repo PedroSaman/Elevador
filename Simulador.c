@@ -3,12 +3,12 @@
 #include "Estruturas_de_Dados.h"
 #include "Simulador.h"
 
-void Carrega_Fila_com_os_Dados(TipoFila *Fila){
+void Carrega_Fila_com_os_Dados(TipoFila *Fila, char Qual_Arquivo[]){
 	FILE *fp=NULL;
 	int andar_maximo, numero_de_eventos, carga_maxima;
 	TipoItem Info;
 
-	fp = fopen("arquivo_com_as_entradas.txt","r");
+	fp = fopen(Qual_Arquivo ,"r");
 	if(fp == NULL){
 		printf("Erro ao tentar abrir o arquivo\n");
 	}
@@ -20,14 +20,13 @@ void Carrega_Fila_com_os_Dados(TipoFila *Fila){
 		Enfileira(Info, Fila);
 		numero_de_eventos--;
 	}
-
+	fclose(fp);
 }
 
 int Chamou_Elevador_FIFO(TipoFila *Fila, int Linha_Do_Tempo, int Andar_inicial){
 	
 	TipoItem Info;
 	int tempo_de_espera, tempo_dentro_do_elevador, Andar_Atual, Tempo_Atual;
-	
 	if(Vazia(*Fila)){
 		return 0;
 	}
