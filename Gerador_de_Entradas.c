@@ -64,9 +64,12 @@ int main(){
 			
 			andar_de_destino = (rand() % ANDAR_MAXIMO) +1;
 		}while(andar_de_origem==andar_de_destino);
-
-		fprintf(fp,"%d %d %d\n", andar_de_origem, andar_de_destino, tempo_de_chamada[i]);
 		
+		if(tempo_de_chamada[i]>0 || tempo_de_chamada[i]<100000){
+			fprintf(fp,"%d %d %d\n", andar_de_origem, andar_de_destino, tempo_de_chamada[i]);
+			/*Por algum motivo o quicksort está colocando um valor errado no primeiro tempo de chamada as vezes 
+				para resolver isto tem esse if*/
+		}		
 		i++;
 		pessoas_a_entrar--;
 	}
