@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include "Estruturas_de_Dados.h"
 
+/*Implementação para funções da fila*/
+
 void Faz_Fila_Vazia(TipoFila *Fila){
 	/*Recebe como argumento o nome de uma fila*/
 	
@@ -38,6 +40,8 @@ void Desenfileira(TipoFila *Fila, TipoItem *Item){
 	*Item = Fila->Frente->Item;
 	free(q);
 }
+
+/*Implementaão de funções extras*/
 
 int Modulo(int Numero){
 	/*Retorna o módulo do número dado*/
