@@ -8,13 +8,16 @@ void Chamou_Elevador_Inteligente(TipoFila *Fila, int carga_maxima){
 	TipoItem Info, DadoDeSaida;
 	TipoFila Fila_de_Espera;
 	Apontador AUX;
-	int carga_atual, dacerto, Tempo_Atual=0, Andar_Atual=1, tempo_dentro_do_elevador, tempo_de_espera, ajuda;
+	int carga_atual, contador, Tempo_Atual=0, Andar_Atual=1, tempo_dentro_do_elevador, tempo_de_espera, var_aux_andar;
 
 
 	Faz_Fila_Vazia(&Fila_de_Espera);
 	carga_atual=0;
+	/* Enquanto a fila com os dados de entrada não for vazia */
 	while(!(Vazia(*Fila))){
+		/* Enquanto a carga dentro do elevador não for máxima */
 		while(carga_atual != carga_maxima){
+			/* Sair se a fila acabar antes de lotar o elevador */
 			if(Vazia(*Fila)){
 				break;
 			}
@@ -23,32 +26,45 @@ void Chamou_Elevador_Inteligente(TipoFila *Fila, int carga_maxima){
 			carga_atual+=1;
 
 			if(Info.tempo_de_chamada > Tempo_Atual){
-				Info.tempo_que_entrou = Modulo(Info.andar_de_origem - Andar_Atual)+Info.tempo_de_chamada;
+				Info.tempo_que_entrou = Modulo(Info.andar_de_origem - Andar_Atual) + Info.tempo_de_chamada;
 			}else {
-				Info.tempo_que_entrou = Modulo(Info.andar_de_origem - Andar_Atual)+Info.tempo_de_chamada+(Tempo_Atual - Info.tempo_de_chamada);
+				Info.tempo_que_entrou = Modulo(Info.andar_de_origem - Andar_Atual) 
+													+ Info.tempo_de_chamada + (Tempo_Atual - Info.tempo_de_chamada);
 			}
+			
 			Andar_Atual = Info.andar_de_origem;
 			Tempo_Atual = Info.tempo_que_entrou+1;
+			/* Coloca o passageiro dentro da fila de prioridade para atendimento */
 			Enfileira(Info,&Fila_de_Espera);
 			
+			/* Esta parte do código é a chave para o funcionamento da lógica proposta */
 			if((Fila->Frente->Prox)!=NULL){
-			dacerto=0;
-			ajuda = Andar_Atual;
-			for(AUX=Fila_de_Espera.Frente->Prox; AUX!=NULL; AUX=AUX->Prox){
-				dacerto+=(Modulo(AUX->Item.andar_de_destino - ajuda) + 1);
-				ajuda = AUX->Item.andar_de_destino;
-			}
-				if(Fila->Frente->Prox->Item.tempo_de_chamada > Tempo_Atual+dacerto){ 
-					break;
+				/* A variável contador serve para contar o tempo que levaria para levar todos os passageiros atuais */
+				/* aos seus andares de destino. A variável var_aux_andar atualiza o andar que o elevador estaria se */ 
+				/* fosse deixar os passageiros atuais em seus andares de destino.                                   */
+				contador = 0;
+				var_aux_andar = Andar_Atual;
+				/* Loop que roda em toda a fila Fila_de_Espera */
+				for(AUX=Fila_de_Espera.Frente->Prox; AUX!=NULL; AUX=AUX->Prox){
+					contador+=(Modulo(AUX->Item.andar_de_destino - var_aux_andar) + 1);
+					var_aux_andar = AUX->Item.andar_de_destino;
 				}
+					/* Comparação crucial, ela vai decidir o que é mais rápido, deixar todos passageiros em seus */ 
+					/* andares de destino ou pegar o próximo passageiro. 										 */
+					if(Fila->Frente->Prox->Item.tempo_de_chamada > Tempo_Atual+contador){ 
+						break;
+					}
 			}
 		}
 		carga_atual=0;
+		/* Entra aqui quando ou a carga é máxima, ou é mais vantajoso sair antes ou a fila acaba */
 		while(!(Vazia(Fila_de_Espera))){
+			/* Lida apenas com a fila de espera, o primeiro que entrou é o primeiro a sair */
 			Desenfileira(&Fila_de_Espera, &DadoDeSaida);
- 			tempo_dentro_do_elevador = Modulo(DadoDeSaida.tempo_que_entrou - Tempo_Atual) + Modulo(Andar_Atual - DadoDeSaida.andar_de_destino);
+ 			tempo_dentro_do_elevador = Modulo(DadoDeSaida.tempo_que_entrou - Tempo_Atual)
+ 																 + Modulo(Andar_Atual - DadoDeSaida.andar_de_destino);
 			tempo_de_espera = Modulo(DadoDeSaida.tempo_que_entrou - DadoDeSaida.tempo_de_chamada);
-			Tempo_Atual +=  (Modulo(Andar_Atual - DadoDeSaida.andar_de_destino)+1);
+			Tempo_Atual +=  (Modulo(Andar_Atual - DadoDeSaida.andar_de_destino) + 1);
 			Andar_Atual = DadoDeSaida.andar_de_destino;
 			printf("Tempo de espera: %d Zepslons\t Tempo dentro do elevador: %d Zepslons\t Tempo Total: %d\n\n", tempo_de_espera, tempo_dentro_do_elevador,(tempo_de_espera+tempo_dentro_do_elevador));
 		}
@@ -78,6 +94,7 @@ void Carrega_Fila_com_os_Dados(TipoFila *Fila, char Qual_Arquivo[],int *andar_ma
 	fclose(fp);
 }
 
+/* Função recursiva */
 int Chamou_Elevador_FIFO(TipoFila *Fila,int Tempo_Atual,int Andar_Atual){
 	
 	TipoItem Info;
