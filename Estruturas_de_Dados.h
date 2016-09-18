@@ -7,7 +7,7 @@ typedef struct Celula_str *Apontador;
 typedef int TipoChave;
 
 typedef struct TipoItem {
-	TipoChave andar_de_origem, andar_de_destino, tempo_de_chamada;
+	TipoChave andar_de_origem, andar_de_destino, tempo_de_chamada, tempo_que_entrou;
 } TipoItem;
 
 typedef struct Celula_str {
@@ -27,6 +27,8 @@ void Enfileira(TipoItem x, TipoFila *Fila);
 
 void Desenfileira(TipoFila *Fila, TipoItem *Item);
 
+/*Definição de funções extras*/
+	
 int Modulo(int Numero);
 
 #endif
