@@ -40,7 +40,7 @@ int Chamou_Elevador_FIFO(TipoFila *Fila, int Linha_Do_Tempo, int Andar_inicial){
 	/*Garante que vai ser positivo*/
 	
 	if((Info.tempo_de_chamada < Linha_Do_Tempo)) tempo_de_espera += Linha_Do_Tempo - Info.tempo_de_chamada;
-	/*Caso alguem chame o elevador antes dele deixar quem chamou antes no seu destino é necessário adicionar esse valor*/
+	/*Caso alguem chame o elevador antes dele deixar no seu destino quem chamou antes, é necessário adicionar esse valor*/
 	
 	tempo_dentro_do_elevador = Info.andar_de_origem - Info.andar_de_destino;
 	/*Tempo entre o andar chamado até o andar de destino*/
@@ -54,7 +54,7 @@ int Chamou_Elevador_FIFO(TipoFila *Fila, int Linha_Do_Tempo, int Andar_inicial){
 
 	printf("Tempo de espera: %d Zepslons\t Tempo dentro do elevador: %d Zepslons\n", tempo_de_espera, tempo_dentro_do_elevador);
 	return Chamou_Elevador_FIFO(Fila,Tempo_Atual,Andar_Atual);
-	/*O segundo arguemto é a linha do tempo, existe esse +2 pois tem q ser levado em consideração aqui o tempo da pessoa
+	/*O segundo argumento é a linha do tempo, existe esse +2 pois tem q ser levado em consideração aqui o tempo da pessoa
 	entrar e sair do elevador (2 zepslons) esse tempo não altera o tempo de espera ou o tempo dentro do elevador, mas 
 	interfere no tempo de espera das outras pessoas que chamem o elevador enquanto ele leva outro passageiro.*/
 }
