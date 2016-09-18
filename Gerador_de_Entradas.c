@@ -8,8 +8,8 @@
 #include <stdlib.h>
 #include <time.h>
 
-#define ANDAR_MAXIMO 12
-#define NUMERO_DE_EVENTOS 25
+#define ANDAR_MAXIMO 6
+#define NUMERO_DE_EVENTOS 100
 #define CARGA_MAXIMA 5 /*5 pessoas*/
 
 /* Constantes auto explicativas, NUMERO_DE_EVENTOS dita quantas pessoas vão chamar o elevador na simulação
@@ -58,18 +58,24 @@ int main(){
 	quick(tempo_de_chamada,0,NUMERO_DE_EVENTOS);
 	i=0;
 	while(pessoas_a_entrar>0){
-		/* Gera um número aleatório para o andar que foi chamado entre o intervalo [1,ANDAR_MAXIMO] */
-		andar_de_origem = (rand() % ANDAR_MAXIMO) +1;
+		/* 66% de chance de gerar um número aleatório para o andar de origem no intervalo [1,ANDAR_MAXIMO] */ 
+		/* e 33% de chance de ser o 1º andar.                                                              */
+		if (rand()%3 == 0){
+			andar_de_origem = 1;
+		}else andar_de_origem = (rand() % ANDAR_MAXIMO) +1;
+		/* 75% de chance de gerar um número aleatório para o andar de destino no intervalo [1,ANDAR_MAXIMO] */ 
+		/* e 25% de chance de ser o 1º andar.                                                               */
 		do {
-			
-			andar_de_destino = (rand() % ANDAR_MAXIMO) +1;
+			if (rand()%4 == 0 ){
+				andar_de_destino = 1;
+			}else andar_de_destino = (rand() % ANDAR_MAXIMO) +1;
 		}while(andar_de_origem==andar_de_destino);
-		
-		if(tempo_de_chamada[i]>0 || tempo_de_chamada[i]<100000){
-			fprintf(fp,"%d %d %d\n", andar_de_origem, andar_de_destino, tempo_de_chamada[i]);
+		if(tempo_de_chamada[i]<0 || tempo_de_chamada[i]>1001){
+			tempo_de_chamada[i] = 1;
 			/*Por algum motivo o quicksort está colocando um valor errado no primeiro tempo de chamada as vezes 
 				para resolver isto tem esse if*/
 		}		
+		fprintf(fp,"%d %d %d\n", andar_de_origem, andar_de_destino, tempo_de_chamada[i]);
 		i++;
 		pessoas_a_entrar--;
 	}
