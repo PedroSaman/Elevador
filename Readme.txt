@@ -28,7 +28,8 @@ para a simulação é o zepslon e equivale a um instante da simulação. O tempo
 calculados usando as informações de origem e destino, levando em consideração que o elevador demora um zepslon para percorrer 
 cada andar e que cada passageiro leva um zepslon para entrar e um para sair de dentro do elevador. Os valores calculados são 
 impressos no terminal. O procedimento é repetido até que a fila fique vazia.
-	Foi usada a função  getopt para passar argumentos pelo terminal e escolher qual lógica seria executada pelo programa e qual o nome do arquivo com os dados de entrada. 
+	Foi usada a função  getopt para passar argumentos pelo terminal e escolher qual lógica seria executada pelo programa e 
+qual o nome do arquivo com os dados de entrada. 
 
 Módulos:
  
