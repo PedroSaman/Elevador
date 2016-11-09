@@ -3,7 +3,7 @@
 #include "Estruturas_de_Dados.h"
 #include "Simulador.h"
 
-void Chamou_Elevador_Inteligente(TipoFila *Fila, int carga_maxima){
+void Chamou_Elevador_B(TipoFila *Fila, int carga_maxima){
 
 	TipoItem Info, DadoDeSaida;
 	TipoFila Fila_de_Espera;
