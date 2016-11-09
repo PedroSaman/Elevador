@@ -31,10 +31,10 @@ int main(int argc, char *argv[]){
 						Chamou_Elevador_FIFO(&Fila,Tempo_Inicial, Andar_inicial);
 						gettimeofday(&fim, NULL);
 
-					}else if(strcmp (optarg,"Inteligente") == 0){
-						printf("---------------- Você escolheu o Simulador Inteligente ----------------\n\n");
+					}else if(strcmp (optarg,"B") == 0){
+						printf("--------------------- Você escolheu o Simulador B ---------------------\n\n");
 						gettimeofday(&inicio, NULL);
-						Chamou_Elevador_Inteligente(&Fila, carga_maxima);
+						Chamou_Elevador_B(&Fila, carga_maxima);
 						gettimeofday(&fim, NULL);
 
 					}
@@ -42,7 +42,7 @@ int main(int argc, char *argv[]){
 			case 'h':
 					printf("***************************************************\n***********************Ajuda***********************\n***************************************************\n");
 					printf("\t -t Para escolher qual simulador usar. EX: -f FIFO\t");
-					printf("Disponiveis: FIFO e Inteligente\n");
+					printf("Disponiveis: FIFO e B\n");
 					printf("\t -a Para escolher qual arquivo.txt com os dados de entrada. EX: -a nome_do_arquivo ");
 					printf("OBS: O arquivo tem que estar no mesmo diretório\n");
 					printf("\t -h Para mostrar ajuda\n");
