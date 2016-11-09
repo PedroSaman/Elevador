@@ -1,4 +1,5 @@
-Simulador de elevador
+					Simulador de elevador
+					
 Este projeto foi desenvolvido para a matéria de Estrutura de Dados pela Universidade de Brasília.
 
 Autores:
