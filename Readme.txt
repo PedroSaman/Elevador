@@ -1,5 +1,4 @@
-					Simulador de elevador
-					
+Simulador de elevador
 Este projeto foi desenvolvido para a matéria de Estrutura de Dados pela Universidade de Brasília.
 
 Autores:
@@ -13,8 +12,8 @@ Objetivos:
  
 Descrição:
 
-	O programa foi implementado em módulos. Existem duas lógicas de Funcionamento do elevador, sendo um “First in first 
-	out” (FIFO) e outra criada por nós. Foi utilizado um tipo abstrato de dados (TAD), e foi utilizada uma fila para armazenar os
+	O programa foi implementado em módulos. Existem duas lógicas de Funcionamento do elevador, sendo um “First in first
+out” (FIFO) e outra criada por nós. Foi utilizado um tipo abstrato de dados (TAD), e foi utilizada uma fila para armazenar os
 dados do arquivo de entradas gerado, e para manipulá-los foram usadas suas respectivas funções (enfileira, desenfileira, etc).
 Os dados de entrada gerados foram ordenados quanto ao tempo de chamada por meio do Quicksort e só depois foram enfileirados.
 	Para a lógica FIFO, o elevador é inicializado no andar um, e então busca o primeiro passageiro que chamou, o deixa em 
